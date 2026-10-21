@@ -1,12 +1,24 @@
 import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './app.html',
+  styleUrls: ['./app.css']
 })
 export class App {
-  protected readonly title = signal('demo-project');
+  currentPage = 1;
+
+  nextPage() {
+    if (this.currentPage < 6) {
+      this.currentPage++;
+    }
+  }
+
+  reset() {
+    this.currentPage = 1;
+  }
 }

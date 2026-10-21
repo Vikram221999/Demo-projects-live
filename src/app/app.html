@@ -1,38 +1,68 @@
-<div class="cinematic-container">
-  <!-- The Surprise Intro -->
-  <div class="intro-screen">
-    <h2 class="intro-text">I have a surprise for you...</h2>
+<div class="surprise-container">
+
+  <!-- Page 1: Introduction -->
+  <div class="page slide-in" *ngIf="currentPage === 1">
+    <div class="content">
+      <h1>Wait a minute... 🤔</h1>
+      <p>Is today a normal day? I don't think so...</p>
+      <div class="panda-peek">🐼</div>
+      <button class="btn" (click)="nextPage()">Find out</button>
+    </div>
   </div>
 
-  <!-- The Main Reveal -->
-  <div class="reveal-content">
-
-    <!-- Heart Shower -->
-    <div class="heart-shower">
-      <div class="falling-heart" style="--delay: 0s; --left: 10%;">❤️</div>
-      <div class="falling-heart" style="--delay: 2s; --left: 20%;">💖</div>
-      <div class="falling-heart" style="--delay: 1s; --left: 30%;">❤️</div>
-      <div class="falling-heart" style="--delay: 3s; --left: 40%;">💕</div>
-      <div class="falling-heart" style="--delay: 0.5s; --left: 50%;">❤️</div>
-      <div class="falling-heart" style="--delay: 2.5s; --left: 60%;">💖</div>
-      <div class="falling-heart" style="--delay: 1.5s; --left: 70%;">❤️</div>
-      <div class="falling-heart" style="--delay: 3.5s; --left: 80%;">💕</div>
-      <div class="falling-heart" style="--delay: 0.2s; --left: 90%;">❤️</div>
+  <!-- Page 2: Build Up -->
+  <div class="page zoom-in" *ngIf="currentPage === 2">
+    <div class="content">
+      <h1>Something special is happening!</h1>
+      <p>The pandas are getting everything ready...</p>
+      <div class="panda-run">🏃‍♂️🐼 📦</div>
+      <button class="btn" (click)="nextPage()">Keep going</button>
     </div>
+  </div>
 
-    <!-- The Quote -->
-    <div class="glass-card">
-      <h1 class="quote-text">
-        "In all the world, there is no heart for me like yours. <br>
-        In all the world, there is no love for you like mine."
-      </h1>
+  <!-- Page 3: Excitement -->
+  <div class="page bounce-in" *ngIf="currentPage === 3">
+    <div class="content">
+      <h1>Are you ready?</h1>
+      <p>Take a deep breath...</p>
+      <div class="panda-breathe">🐼💨</div>
+      <button class="btn" (click)="nextPage()">I'm ready!</button>
+    </div>
+  </div>
 
-      <!-- The Name -->
-      <div class="name-container">
-        <span class="for-you">Forever Yours,</span>
-        <h2 class="kavica-name">Kavica</h2>
+  <!-- Page 4: Almost There -->
+  <div class="page spin-in" *ngIf="currentPage === 4">
+    <div class="content">
+      <h1>Just a little more...</h1>
+      <p>Drumroll please! 🥁</p>
+      <div class="panda-drum">🐼🥁🐼</div>
+      <button class="btn" (click)="nextPage()">Show me!</button>
+    </div>
+  </div>
+
+  <!-- Page 5: The Reveal -->
+  <div class="page pop-in" *ngIf="currentPage === 5">
+    <div class="content">
+      <h1 class="rainbow-text">IT'S YOUR BIRTHDAY! 🎉</h1>
+      <p>Let the party begin!</p>
+      <div class="panda-party">🎈🐼🎁</div>
+      <button class="btn party-btn" (click)="nextPage()">Start the Party!</button>
+    </div>
+  </div>
+
+  <!-- Page 6: Final Celebration -->
+  <div class="page party-mode fade-in" *ngIf="currentPage === 6">
+    <div class="confetti"></div>
+    <div class="content final-card">
+      <h1>Happy Birthday! 🎂</h1>
+      <p>Wishing you a day filled with joy, laughter, and lots of cake!</p>
+      <div class="dancing-pandas">
+        <span class="dance-1">🐼</span>
+        <span class="dance-2">🐼</span>
+        <span class="dance-3">🐼</span>
       </div>
+      <button class="btn" (click)="reset()">Experience it again</button>
     </div>
-
   </div>
+
 </div>
