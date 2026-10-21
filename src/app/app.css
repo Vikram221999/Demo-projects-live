@@ -1,0 +1,97 @@
+.love-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  font-family: 'Georgia', serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.quote-box {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 3rem 4rem;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  max-width: 600px;
+  /* Fade-in and slide-up animation on load */
+  animation: fadeUp 1.5s ease-out forwards;
+}
+
+.quote-text {
+  font-size: 2.2rem;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.name-highlight {
+  font-size: 1.8rem;
+  color: #ff4b82;
+  font-weight: bold;
+  /* Glowing pulse animation for the name */
+  animation: pulse 1.5s infinite alternate;
+}
+
+/* --- Animations --- */
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); text-shadow: 0 0 0px rgba(255, 75, 130, 0); }
+  100% { transform: scale(1.05); text-shadow: 0 0 15px rgba(255, 75, 130, 0.6); }
+}
+
+/* --- Floating Hearts Background --- */
+
+.hearts-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -10%;
+  width: 20px;
+  height: 20px;
+  background-color: #ff758c;
+  transform: rotate(-45deg);
+  animation: float 6s ease-in infinite;
+  opacity: 0.6;
+}
+
+/* Creating the heart shape using pseudo-elements */
+.heart::before, .heart::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #ff758c;
+  border-radius: 50%;
+}
+
+.heart::before { top: -10px; left: 0; }
+.heart::after { top: 0; left: 10px; }
+
+/* Different positions and timings for each heart */
+.heart:nth-child(1) { left: 15%; animation-duration: 7s; animation-delay: 0s; }
+.heart:nth-child(2) { left: 35%; animation-duration: 5s; animation-delay: 2s; }
+.heart:nth-child(3) { left: 55%; animation-duration: 8s; animation-delay: 1s; }
+.heart:nth-child(4) { left: 75%; animation-duration: 6s; animation-delay: 3s; }
+.heart:nth-child(5) { left: 90%; animation-duration: 7s; animation-delay: 4s; }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 0.8; }
+  100% { transform: translateY(-120vh) rotate(-45deg) scale(1.5); opacity: 0; }
+}
