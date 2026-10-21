@@ -1,97 +1,187 @@
-.love-container {
+/* --- Global Container --- */
+.cinematic-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #050505;
+  font-family: 'Georgia', serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-  font-family: 'Georgia', serif;
-  overflow: hidden;
-  position: relative;
 }
 
-.quote-box {
-  text-align: center;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 3rem 4rem;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  max-width: 600px;
-  /* Fade-in and slide-up animation on load */
-  animation: fadeUp 1.5s ease-out forwards;
-}
-
-.quote-text {
-  font-size: 2.2rem;
-  color: #4a4a4a;
-  margin-bottom: 2rem;
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.name-highlight {
-  font-size: 1.8rem;
-  color: #ff4b82;
-  font-weight: bold;
-  /* Glowing pulse animation for the name */
-  animation: pulse 1.5s infinite alternate;
-}
-
-/* --- Animations --- */
-
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(30px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); text-shadow: 0 0 0px rgba(255, 75, 130, 0); }
-  100% { transform: scale(1.05); text-shadow: 0 0 15px rgba(255, 75, 130, 0.6); }
-}
-
-/* --- Floating Hearts Background --- */
-
-.hearts-bg {
+/* --- Intro Screen (The Tease) --- */
+.intro-screen {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-color: #0a0004;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  /* Fades out completely after 4 seconds */
+  animation: hideIntro 5s forwards;
+}
+
+.intro-text {
+  color: #ffb3c6;
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  opacity: 0;
+  /* Fades in, glows, then fades out */
+  animation: dramaticIntro 4s ease-in-out forwards;
+}
+
+/* --- Main Reveal Content --- */
+.reveal-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  /* Animated moving gradient background */
+  background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ffb199, #ff0844);
+  background-size: 400% 400%;
+  /* Fades in after intro finishes */
+  animation: revealBackground 15s ease infinite, showContent 1s 4.5s forwards;
+}
+
+/* --- The Glass Card --- */
+.glass-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 4rem;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  max-width: 800px;
+  transform: scale(0.8);
+  opacity: 0;
+  /* Pops in after the background is revealed */
+  animation: popInCard 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 5s forwards;
+}
+
+/* --- Quote Text (Cinematic Blur Reveal) --- */
+.quote-text {
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 2rem;
+  filter: blur(10px);
+  opacity: 0;
+  /* Slowly unblurs and appears */
+  animation: unblurText 2s ease-out 6s forwards;
+}
+
+/* --- Her Name (The Climax) --- */
+.name-container {
+  margin-top: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  /* Slides up last */
+  animation: slideUpName 1.5s ease-out 7.5s forwards;
+}
+
+.for-you {
+  font-size: 1.2rem;
+  color: #ffe6ea;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.kavica-name {
+  font-size: 5rem;
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Brush Script MT', 'Great Vibes', cursive; /* Looks like handwriting */
+  text-shadow: 0 0 10px #ff0844, 0 0 20px #ff0844, 0 0 40px #ff0844;
+  /* Continually beats like a heart */
+  animation: heartBeatText 1.5s infinite 9s;
+}
+
+/* --- Falling Heart Shower --- */
+.heart-shower {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
 }
 
-.heart {
+.falling-heart {
   position: absolute;
-  bottom: -10%;
-  width: 20px;
-  height: 20px;
-  background-color: #ff758c;
-  transform: rotate(-45deg);
-  animation: float 6s ease-in infinite;
-  opacity: 0.6;
+  font-size: 2rem;
+  left: var(--left);
+  opacity: 0;
+  /* Falling animation starts after the name is revealed */
+  animation: fallDown 6s linear infinite;
+  animation-delay: calc(8s + var(--delay));
 }
 
-/* Creating the heart shape using pseudo-elements */
-.heart::before, .heart::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: #ff758c;
-  border-radius: 50%;
+/* --- Keyframe Animations --- */
+
+@keyframes dramaticIntro {
+  0% { opacity: 0; filter: blur(5px); transform: scale(0.9); }
+  30% { opacity: 1; filter: blur(0px); transform: scale(1); }
+  70% { opacity: 1; filter: blur(0px); transform: scale(1); text-shadow: 0 0 20px #ffb3c6; }
+  100% { opacity: 0; filter: blur(5px); transform: scale(1.1); }
 }
 
-.heart::before { top: -10px; left: 0; }
-.heart::after { top: 0; left: 10px; }
+@keyframes hideIntro {
+  0% { visibility: visible; opacity: 1; }
+  99% { opacity: 0; }
+  100% { visibility: hidden; opacity: 0; display: none; }
+}
 
-/* Different positions and timings for each heart */
-.heart:nth-child(1) { left: 15%; animation-duration: 7s; animation-delay: 0s; }
-.heart:nth-child(2) { left: 35%; animation-duration: 5s; animation-delay: 2s; }
-.heart:nth-child(3) { left: 55%; animation-duration: 8s; animation-delay: 1s; }
-.heart:nth-child(4) { left: 75%; animation-duration: 6s; animation-delay: 3s; }
-.heart:nth-child(5) { left: 90%; animation-duration: 7s; animation-delay: 4s; }
+@keyframes revealBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-@keyframes float {
-  0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 0.8; }
-  100% { transform: translateY(-120vh) rotate(-45deg) scale(1.5); opacity: 0; }
+@keyframes showContent {
+  to { opacity: 1; }
+}
+
+@keyframes popInCard {
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes unblurText {
+  to { filter: blur(0px); opacity: 1; }
+}
+
+@keyframes slideUpName {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes heartBeatText {
+  0% { transform: scale(1); text-shadow: 0 0 10px #ff0844, 0 0 20px #ff0844, 0 0 40px #ff0844; }
+  15% { transform: scale(1.1); text-shadow: 0 0 20px #ff0844, 0 0 40px #ff0844, 0 0 60px #ff0844; }
+  30% { transform: scale(1); text-shadow: 0 0 10px #ff0844, 0 0 20px #ff0844, 0 0 40px #ff0844; }
+  45% { transform: scale(1.1); text-shadow: 0 0 20px #ff0844, 0 0 40px #ff0844, 0 0 60px #ff0844; }
+  100% { transform: scale(1); text-shadow: 0 0 10px #ff0844, 0 0 20px #ff0844, 0 0 40px #ff0844; }
+}
+
+@keyframes fallDown {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  50% { transform: translateY(50vh) rotate(180deg) translateX(20px); opacity: 0.8; }
+  100% { transform: translateY(110vh) rotate(360deg) translateX(-20px); opacity: 0; }
 }
